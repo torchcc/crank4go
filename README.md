@@ -48,7 +48,7 @@ Websockets with cranker:
 Running locally for test
 ---------------
 
-### Running from a IDE
+### Running from an IDE
 1. go mod tidy
 2. open `test/e2etest/dryrun_router_test.go` run the test and a router will be started
 3. open `test/e2etest/connector_manual_test.go`, a connector and a web-service will be started and connector to the router
@@ -95,7 +95,8 @@ func main() {
 
 #### router usage
 
-1. please refer to `crank4go/test/e2etest/dryrun_router_test.go`
+1. here is example of deploying the [API Gateway crank4go router](https://github.com/torchcc/crank4go-router) 
+2. if you want more functionalities, you might want to refer to `crank4go/test/e2etest/cranker_with_all_extention_single_service_test.go`
 
 
 Advantages
