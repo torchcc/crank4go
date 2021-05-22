@@ -54,37 +54,40 @@ Running locally for test
 3. open `test/e2etest/connector_manual_test.go`, a connector and a web-service will be started and connector to the router
 4. open `https://localhost:9000` in your browser , it is the side facing to users 
    - `https://localhost:9070/api/registrations` shows the registration status of router
-   - `http://0.0.0.0:12438/health` shows the health status of router
+   - `http://0.0.0.0:12439/health` shows the health status of router
 
 ### Use it in your project 
 
 #### connector usage
-
+0. `go get -v github.com/torchcc/crank4go`
 1. create a web-service with a path prefix (context-path concept in java) e.g. `/my-service/...`
 2. start the web-service listening on a random port
 3. register your web server with one or more routers:
 ```go
 package main
+
 import (
-    "fmt"
-    "net/http"
-    "net/url"
-    "github.com/torchcc/crank4go"
+	"fmt"
+	. "github.com/torchcc/crank4go/connector"
+	"net/http"
+	"net/url"
 )
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
-   fmt.Fprintf(w, "Hello World")
+	fmt.Fprintf(w, "Hello Crank4go")
 }
 
 func main() {
 	targetURI, _ := url.Parse("http://localhost:5000")
-	routerURI, _ := url.Parse("wss://localhost:9070") // should be the port which your Router Registration server listens on 
-  
-   	connectorConfig := NewConnectorConfig2(targetURI, "my-service", []*url.URL{routerURI}, "my-service-component-name", nil).
-   		SetSlidingWindowSize(2)
-	connector := CreateAndStartConnector(connectorConfig)
-   
-    http.HandleFunc("/my-service", HelloHandler)
-   http.ListenAndServe(":5000", nil)
+	routerURI, _ := url.Parse("wss://localhost:9070") // should be the port which your Router Registration server listens on
+
+	connectorConfig := NewConnectorConfig2(targetURI, "my-service", []*url.URL{routerURI}, "my-service-component-name", nil).
+		SetSlidingWindowSize(2)
+	_ = CreateAndStartConnector(connectorConfig)
+
+	http.HandleFunc("/my-service", HelloHandler)
+	http.ListenAndServe(":5000", nil)
+	// and then you can query your api gateway to access your service. 
+	// e.g. if your router listens on https://localhost:9000, then you can access  https://localhost:9000/my-service
 }
 
 ```
