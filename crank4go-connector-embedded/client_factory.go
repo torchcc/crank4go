@@ -18,7 +18,7 @@ var (
 const (
 	// for websocket conn to read msg
 	maxWebsocketMsgSize = 16384
-	// for httpClient to write msg, use jetty's reverseProxy default value
+	// WriteBufferSize for httpClient to write msg, use jetty's reverseProxy default value
 	WriteBufferSize = 4 * 8192
 )
 

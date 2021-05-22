@@ -54,16 +54,14 @@ func (r *RouterConfig) IpValidator() Validator {
 	return r.ipValidator
 }
 
-/**
- * @Description: Cranker configuration. Mandatory values are set in constructor; optional values are set by setters.
- * @param websocketInterface e.g. 0.0.0.0
- * @param webserverInterface e.g. 0.0.0.0
- * @param registrationWebsocketPort the port that crank which connector make websocket connect to
- * @param websocketTLSConfig
- * @param webserverTLSConfig
- * @param httpPorts the port to point your browser at. https://hostname:port
- * @return *RouterConfig
- */
+// NewRouterConfig  Mandatory values are set in constructor; optional values are set by setters.
+// @param websocketInterface e.g. 0.0.0.0
+// @param webserverInterface e.g. 0.0.0.0
+// @param registrationWebsocketPort the port that crank which connector make websocket connect to
+// @param websocketTLSConfig
+// @param webserverTLSConfig
+// @param httpPorts the port to point your browser at. https://hostname:port
+// @return *RouterConfig
 func NewRouterConfig(websocketInterface, webserverInterface string, registrationWebsocketPort, httpPort int, websocketTLSConfig, webserverTLSConfig *tls.Config) *RouterConfig {
 	return NewRouterConfig2(websocketInterface, webserverInterface, registrationWebsocketPort, httpPort, websocketTLSConfig, webserverTLSConfig, nil, nil)
 }

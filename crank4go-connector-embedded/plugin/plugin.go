@@ -6,19 +6,19 @@ import (
 )
 
 type ConnectorPluginStatCarrier interface {
-	// the stat that connector plugin carries from connector socket context to 2 plugins method in a connectorPlugin
+	// GetStat the stat that connector plugin carries from connector socket context to 2 plugins method in a connectorPlugin
 	GetStat() interface{}
 
-	// close the stat when a plugin method finished its job
+	// Close close the stat when a plugin method finished its job
 	Close() error
 }
 
 type ConnectorPlugin interface {
-	// run the plugin method before request is sent to local service connector after connector accepted the cranker router
+	// HandleBeforeRequestSent run the plugin method before request is sent to local service connector after connector accepted the cranker router
 	// eg: sometime when connector side need to send some event to notify / log the status of request processing
 	HandleBeforeRequestSent(req *CrankerProtocolRequest, carrier ConnectorPluginStatCarrier) (ConnectorPluginStatCarrier, error)
 
-	// run the plugin method after local service connector response received
+	// HandleAfterResponseReceived run the plugin method after local service connector response received
 	// eg: sometime when connector side need to send some event to notify / log the status of request processing
 	HandleAfterResponseReceived(resp *CrankerProtocolResponse, carrier ConnectorPluginStatCarrier) (ConnectorPluginStatCarrier, error)
 }

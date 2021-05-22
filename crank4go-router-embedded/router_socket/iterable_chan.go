@@ -11,7 +11,7 @@ import (
 
 const defaultChanCapacity = 200
 
-// iterable chan to mock LinkedBlockingQueue
+// IterableChan iterable chan to mock LinkedBlockingQueue
 type IterableChan struct {
 	ch             chan *RouterSocket
 	aliveSocketSet *sync.Map // map[*RouterSocket]struct{}
@@ -19,7 +19,6 @@ type IterableChan struct {
 	length int32
 }
 
-//
 func (c *IterableChan) AliveSocketSlice() []*RouterSocket {
 	slice := make([]*RouterSocket, 0, 8)
 	c.aliveSocketSet.Range(func(key, _ interface{}) bool {
@@ -30,7 +29,7 @@ func (c *IterableChan) AliveSocketSlice() []*RouterSocket {
 	return slice
 }
 
-// indicates if there is element in c.ch
+// IsEmpty indicates if there is element in c.ch
 func (c *IterableChan) IsEmpty() bool {
 	return len(c.ch) == 0
 
@@ -40,12 +39,12 @@ func (c *IterableChan) IsAliveSocketSetEmpty() bool {
 	return c.LenAlive() == 0
 }
 
-// the total element (including dead socket) in c.ch
+// Len the total element (including dead socket) in c.ch
 func (c *IterableChan) Len() int {
 	return len(c.ch)
 }
 
-// return the len of the current LinkedBlockingQueue
+// LenAlive return the len of the current LinkedBlockingQueue
 func (c *IterableChan) LenAlive() int {
 	return int(atomic.LoadInt32(&c.length))
 }
@@ -58,7 +57,7 @@ func (c *IterableChan) decrementAliveSocketNumber() {
 	atomic.AddInt32(&c.length, -1)
 }
 
-// remove a given alive item from the LinkedBlockingQueue,
+// Remove remove a given alive item from the LinkedBlockingQueue,
 // if the given socket is nil,  it is a no-op
 // if the given socket is not in the queue, close the socket
 // bool: indicates if the alive socket set has changed or not after return
@@ -74,7 +73,7 @@ func (c *IterableChan) Remove(socket *RouterSocket) bool {
 	}
 }
 
-// it is non-blocking
+// Offer it is non-blocking
 func (c *IterableChan) Offer(socket *RouterSocket) {
 	if socket == nil {
 		return
@@ -93,7 +92,7 @@ func (c *IterableChan) Offer(socket *RouterSocket) {
 	}()
 }
 
-// it is non-blocking, return the first VALID item of a LinkedBlockingQueue, it the queue is empty, return nil
+// Poll it is non-blocking, return the first VALID item of a LinkedBlockingQueue, it the queue is empty, return nil
 func (c *IterableChan) Poll() (socket *RouterSocket) {
 	// do not delete for loop
 	for {
@@ -111,7 +110,7 @@ func (c *IterableChan) Poll() (socket *RouterSocket) {
 	}
 }
 
-// if there is no alive socket util timeout, nil will be returned
+// PollTimeout if there is no alive socket util timeout, nil will be returned
 func (c *IterableChan) PollTimeout(timeout time.Duration) (socket *RouterSocket) {
 	begin := time.Now()
 
@@ -143,7 +142,7 @@ func (c *IterableChan) Range(f func(value interface{}) bool) {
 	})
 }
 
-// capacity for alive sockets and dead sockets
+// NewIterableChan capacity for alive sockets and dead sockets
 func NewIterableChan(capacity int) *IterableChan {
 	if capacity < 0 {
 		panic(errors.New("IllegalArgumentError: capacity should not be negative"))

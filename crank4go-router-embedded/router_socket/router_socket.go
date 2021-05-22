@@ -19,9 +19,7 @@ import (
 const Authorization = "authorization"
 const writeWait = time.Second
 
-/*
-It is a socket on router side for connector to send response content
-*/
+// RouterSocket It is a socket on router side for connector to send response content
 type RouterSocket struct {
 	RespHeadersNotSendBack map[string]struct{}
 	Route                  string
@@ -87,7 +85,7 @@ func (s *RouterSocket) IsCatchAll() bool {
 	return s.Route == ""
 }
 
-// the websocket connection's client peer's host and port
+// RemoteAddr the websocket connection's client peer's host and port
 func (s *RouterSocket) RemoteAddr() string {
 	return s.remoteAddr
 }
@@ -136,12 +134,7 @@ func (s *RouterSocket) SendPingToConnector() {
 	}
 }
 
-/**
- * A Close Event was received.
- * <p>
- * The underlying Connection will be considered closed at this point.
- *
- */
+// OnWebsocketClose A Close Event was received. The underlying Connection will be considered closed at this point.
 func (s *RouterSocket) OnWebsocketClose(statusCode int, reason string) error {
 	util.LOG.Debugf("router side got closeMessage, statusCode=%d, reason=%s, routerName=%s, routerSocketID=%s",
 		statusCode, reason, s.Route, s.RouterSocketID)
@@ -203,7 +196,7 @@ func (s *RouterSocket) OnWebsocketText(msg string) {
 	}
 }
 
-// please make sure the there is available data in buf before calling this method
+// OnWebsocketBinary please make sure the there is available data in buf before calling this method
 func (s *RouterSocket) OnWebsocketBinary(buf []byte) {
 	atomic.AddInt64(&s.bytesReceived, int64(len(buf)))
 	util.LOG.Debugf("router with routerName: %s, routerSocketID: %s is sending %d bytes to connector",
@@ -221,17 +214,10 @@ func (s *RouterSocket) OnWebsocketBinary(buf []byte) {
 	}
 }
 
-/**
- * A WebSocket exception has occurred.
- * <p>
- * This is a way for the internal implementation to notify of exceptions occured during the processing of websocket.
- * <p>
- * Usually this occurs from bad / malformed incoming packets. (example: bad UTF8 data, frames that are too big, violations of the spec)
- * <p>
- * This will result in the {@link Session} being closed by the implementing side.
- *
- * @param cause the error that occurred.
- */
+// OnWebsocketError A WebSocket exception has occurred.
+// This is a way for the internal implementation to notify of exceptions occured during the processing of websocket.
+// Usually this occurs from bad / malformed incoming packets. (example: bad UTF8 data, frames that are too big, violations of the spec)
+// This will result in the {@link Session} being closed by the implementing side.
 func (s *RouterSocket) OnWebsocketError(cause error) {
 	util.LOG.Errorf("websocket error occurs when websocket server side receiving reading msg from session, err: %s", cause.Error())
 	s.OnSendOrReceiveDataError(cause)
@@ -247,7 +233,7 @@ func (s *RouterSocket) SendData(buf []byte) error {
 	return s.session.WriteMessage(ws.BinaryMessage, buf)
 }
 
-// this will be called when reverseProxy failed too send textMessage or binaryMessage to connector
+// OnSendOrReceiveDataError this will be called when reverseProxy failed too send textMessage or binaryMessage to connector
 func (s *RouterSocket) OnSendOrReceiveDataError(err error) {
 	s.removeBadWebsocket()
 	errMsg := err.Error()
@@ -321,7 +307,7 @@ func (s *RouterSocket) runForever(conn *ws.Conn) {
 			if closeErr, ok := err.(*ws.CloseError); !ok { // conn polling got CloseMessage, execute closeHandler, read again and got CloseError, so if we got CloseError, just ignore it
 				s.OnWebsocketError(err)
 			} else {
-				s.OnWebsocketClose(closeErr.Code, closeErr.Text)
+				_ = s.OnWebsocketClose(closeErr.Code, closeErr.Text)
 			}
 			return
 		}

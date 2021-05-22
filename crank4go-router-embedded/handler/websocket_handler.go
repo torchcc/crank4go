@@ -36,21 +36,6 @@ func (w *WebsocketHandler) WithWebsocketFactory(factory func(w http.ResponseWrit
 	return w
 }
 
-//
-// func (w *WebsocketHandler) Handle(respWriter http.ResponseWriter, req *http.Request, params httprouter.Params) bool {
-// 	if socket := w.factory(respWriter, req); socket == nil {
-// 		return true
-// 	} else {
-// 		conn, err := w.upgrader.Upgrade(respWriter, req, nil) // need to set header CrankerProtocolVersion=1.0 ?
-// 		if err != nil {
-// 			util.LOG.Errorf("upgrade error: %s", err.Error())
-// 			return true
-// 		}
-// 		socket.OnWebsocketConnect(conn)
-// 		return false
-// 	}
-// }
-
 func (w *WebsocketHandler) Handle(respWriter http.ResponseWriter, req *http.Request, params httprouter.Params) bool {
 	if socket := w.factory(respWriter, req); socket == nil {
 		return true

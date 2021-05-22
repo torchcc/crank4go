@@ -47,7 +47,7 @@ func (m *ConnectionMonitor) OnConnectionStarted2(path, routerSocketID string) {
 	LOG.Infof("activeConnections=%d, openFiles=%d, routerName=%s, routerSocketID=%s", m.requestNum, m.openFiles, path, routerSocketID)
 }
 
-// called by connector socket
+// OnConnectionEnded called by connector socket
 func (m *ConnectionMonitor) OnConnectionEnded() {
 	m.reportConnCount(atomic.AddInt32(&m.requestNum, -1))
 	m.reportOpenFilesCount()
@@ -64,7 +64,7 @@ func (m *ConnectionMonitor) OnConnectionEnded2(path, routerSocketID string) {
 	LOG.Infof("activeConnections=%d, openFiles=%d, routerName=%s, routerSocketID=%s", m.requestNum, m.openFiles, path, routerSocketID)
 }
 
-// called by router socket
+// OnConnectionEnded3 called by router socket
 func (m *ConnectionMonitor) OnConnectionEnded3(routerSocketID, path, reqComponentName string, respStatus int, reqDuration, reqBytes, respBytes int64) {
 	activeRequest := atomic.AddInt32(&m.requestNum, -1)
 	if path == "" {
@@ -99,7 +99,7 @@ func (m *ConnectionMonitor) OnConnectionAvailable() {
 	m.reportActiveConnCount(atomic.AddInt32(&m.availableConns, 1))
 }
 
-// called by connector
+// OnConnectionConsumed called by connector
 func (m *ConnectionMonitor) OnConnectionConsumed() {
 	m.reportActiveConnCount(atomic.AddInt32(&m.availableConns, -1))
 }
@@ -140,6 +140,7 @@ func (m *ConnectionMonitor) reportOpenFilesCount() {
 	}
 }
 
+// disable for better performance
 func (m *ConnectionMonitor) reportOpenFilesCount2(handler DataPublishHandler) {
 	return
 	// if os is Unix.

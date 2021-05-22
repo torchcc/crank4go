@@ -58,7 +58,7 @@ func (r *Router) RouterAvailability() *RouterAvailability {
 	return r.routerAvailability
 }
 
-// validate register and deregister request
+// ValidateReq validate register and deregister request
 func ValidateReq(ipValidator Validator, req *http.Request) error {
 	if err := validateIpAddr(ipValidator, req); err != nil {
 		return err
@@ -228,7 +228,7 @@ func (r *Router) CreateRegisterHandler() *httprouter.Router {
 	return httpRouter
 }
 
-// can configure rate limit here
+// CreateHttpHandler can configure rate limit here
 func (r *Router) CreateHttpHandler() *handler.XHTTPHandler {
 	return handler.NewXHttpHandler(NewReverseProxy(r.websocketFarm, r.reqComponentHeader, r.routerConfig.ProxyInterceptors())).
 		AddReqHandlers(handler.XHandlerFunc(handler.PreLoggingFilter)).

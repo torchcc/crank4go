@@ -8,7 +8,7 @@ type IpValidator struct {
 	ipWhiteList map[string]struct{}
 }
 
-// if ip set is nil, isValid will return true by default.
+// IsValid if ip set is nil, isValid will return true by default.
 // if ip set is not nil and the given ip is not in the set, it will return false
 func (v *IpValidator) IsValid(ip string) bool {
 	if v.ipWhiteList == nil {

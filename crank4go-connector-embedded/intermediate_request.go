@@ -36,13 +36,13 @@ func NewIntermediateRequest(url string) *IntermediateRequest {
 	}
 }
 
-// set user agent. we need to set user agent to "" so that golang's http client will not be used and the origin user-agent will be use
+// Agent set user agent. we need to set user agent to "" so that golang's http client will not be used and the origin user-agent will be use
 func (r *IntermediateRequest) Agent(agent string) *IntermediateRequest {
 	r.Headers.Add("User-Agent", agent)
 	return r
 }
 
-// set http method
+// Method set http method
 func (r *IntermediateRequest) Method(method string) *IntermediateRequest {
 	r.method = method
 	return r
@@ -58,12 +58,12 @@ func (r *IntermediateRequest) WithWebsocketSession(session *ws.Conn) *Intermedia
 	return r
 }
 
-// abort sending request to target service
+// Abort abort sending request to target service
 func (r *IntermediateRequest) Abort(err error) {
 	r.result.failure = err
 }
 
-// send the composed httpRequest from connector to target service
+// FireRequestFromConnectorToTargetService send the composed httpRequest from connector to target service
 func (r *IntermediateRequest) FireRequestFromConnectorToTargetService(callback func(result *result)) {
 	defer func() {
 		if e := recover(); e != nil {

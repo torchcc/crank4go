@@ -123,18 +123,18 @@ func (c *Connector) connectToRouter(registerURI *url.URL, connInfo *ConnectionIn
 	}
 }
 
-// return websocketClientFarm info as Map: <router register url, idleConnection number>
+// IdleWebsocketFarmInfo return websocketClientFarm info as Map: <router register url, idleConnection number>
 func (c *Connector) IdleWebsocketFarmInfo() map[string]int {
 	return c.websocketClientFarm.ToMap()
 }
 
-// shutdown the connection to the router, waiting up to 20 seconds for existing requests to complete
+// ShutDown shutdown the connection to the router, waiting up to 20 seconds for existing requests to complete
 // any requests not finished in that time will be terminated.
 func (c *Connector) ShutDown() {
 	c.ShutDownAfterTimeout(30 * time.Second)
 }
 
-// gracefully shuts down the connection to the router, any in-flight requests will continue to be process
+// ShutDownAfterTimeout gracefully shuts down the connection to the router, any in-flight requests will continue to be process
 // until the timeout limit. this method will block until all requests are finished or the timeout is reached.
 // so after it returns you can shutdown your webServer. Note: on timeout, false will be returned as an indicator
 // if there are some remaining requests terminated due to timeout

@@ -20,7 +20,7 @@ func (c CancelErr) Error() string {
 	return "cancel error, detail: " + c.Msg
 }
 
-// An error is returned if caused by client policy (such as
+// HttpClientPolicyErr An error is returned if caused by client policy (such as
 // CheckRedirect), or failure to speak HTTP (such as a network
 // connectivity problem). A non-2xx status code doesn't cause an
 // error.

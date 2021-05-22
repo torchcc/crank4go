@@ -52,7 +52,7 @@ func (c *ConnectorConfig) DataPublishHandlers() []util.DataPublishHandler {
 	return c.dataPublishHandlers
 }
 
-// you can subscribe to this to see various metrics
+// SetDataPublishHandlers you can subscribe to this to see various metrics
 func (c *ConnectorConfig) SetDataPublishHandlers(dataPublishHandlers []util.DataPublishHandler) *ConnectorConfig {
 	if dataPublishHandlers != nil {
 		c.dataPublishHandlers = dataPublishHandlers
@@ -80,7 +80,7 @@ func (c *ConnectorConfig) SlidingWindowSize() int {
 	return c.slidingWindowSize
 }
 
-// controls the idle socket windows of the pool size. please do not set this parameter unless you understand you need more
+// SetSlidingWindowSize controls the idle socket windows of the pool size. please do not set this parameter unless you understand you need more
 // max_value is 100
 func (c *ConnectorConfig) SetSlidingWindowSize(slidingWindowSize int) *ConnectorConfig {
 	c.slidingWindowSize = 2
@@ -94,7 +94,7 @@ func (c *ConnectorConfig) ComponentName() string {
 	return c.componentName
 }
 
-// returns a unique ID for this instance of the connector, This is visible to the router
+// InstanceID returns a unique ID for this instance of the connector, This is visible to the router
 func (c *ConnectorConfig) InstanceID() string {
 	return c.instanceID
 }

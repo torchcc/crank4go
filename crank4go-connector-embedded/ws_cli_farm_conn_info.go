@@ -18,7 +18,7 @@ type WebsocketClientFarm struct {
 	connectorSockets           *sync.Map
 }
 
-// Set by service. maxSlidingWindowSize = 2 * slidingWindowSize because connector add and remove websocket in different goroutines,
+// NewWebsocketClientFarm Set by service. maxSlidingWindowSize = 2 * slidingWindowSize because connector add and remove websocket in different goroutines,
 // which may result in adding websocket goes before removing websocket.
 func NewWebsocketClientFarm(slidingWindowSize int) *WebsocketClientFarm {
 	return &WebsocketClientFarm{

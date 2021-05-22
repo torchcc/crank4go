@@ -7,7 +7,7 @@ import (
 	"syscall"
 )
 
-// a helper function to execute some hooks before exiting the program.
+// ExitProgram a helper function to execute some hooks before exiting the program.
 // usage:
 // 1. wrapper all things that you want to do in a func for example `exitFunc ()`
 // 2. call `ExitProgram(ExitFunc)` inside a `init` func of your program

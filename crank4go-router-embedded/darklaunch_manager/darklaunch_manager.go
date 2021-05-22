@@ -8,19 +8,19 @@ import (
 )
 
 type IpListener interface {
-	// trigger something after an ip is marked as dark ip
+	// AfterDarkIpAdded trigger something after an ip is marked as dark ip
 	AfterDarkIpAdded(addedIp string)
 
-	// trigger something after a ip is revoked from dark ip list
+	// AfterDarkIpRevoked trigger something after a ip is revoked from dark ip list
 	AfterDarkIpRevoked(revokedIp string)
 }
 
 type ServiceListener interface {
 
-	// trigger something after an ip is marked as dark ip
+	// AfterDarkServiceAdded trigger something after an ip is marked as dark ip
 	AfterDarkServiceAdded(addedService string)
 
-	// trigger something after a ip is revoked from dark ip list
+	// AfterDarkServiceRevoked trigger something after a ip is revoked from dark ip list
 	AfterDarkServiceRevoked(revokedService string)
 }
 

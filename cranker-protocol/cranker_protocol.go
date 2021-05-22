@@ -186,7 +186,7 @@ type CrankerProtocolMessage interface {
 * ** endmarker
  */
 
-// define a implementation of the interface
+// CrankerProtocolRequest define a implementation of the interface
 type CrankerProtocolRequest struct {
 	HttpMethod  string
 	Dest        string
@@ -227,7 +227,7 @@ func (req *CrankerProtocolRequest) RequestHasNoBody() bool {
 	return req.endMarker == RequestHasNoBodyMarker
 }
 
-// return rawMsg
+// ToProtocolMessage return rawMsg
 func (req *CrankerProtocolRequest) ToProtocolMessage() string {
 	if req.requestLine != "" && req.Headers != nil {
 		headersStr := ""

@@ -7,7 +7,7 @@ import (
 )
 
 type XHandler interface {
-	// if this method return true, it prevents pending reqHandlers from being called
+	// Handle if this method return true, it prevents pending reqHandlers from being called
 	Handle(w http.ResponseWriter, r *http.Request, params httprouter.Params) bool
 }
 
@@ -21,7 +21,7 @@ func (f XHandlerFunc) Handle(w http.ResponseWriter, r *http.Request, params http
 	return f(w, r, params)
 }
 
-// an implement of net/http Handler, to implement pipeline/filter pattern easily
+// XHTTPHandler an implement of net/http Handler, to implement pipeline/filter pattern easily
 type XHTTPHandler struct {
 	// they are executed before request is handled by target handler
 	reqHandlers []XHandler
@@ -40,7 +40,7 @@ func NewXHttpHandler(targetHandler XHandler) *XHTTPHandler {
 	return &XHTTPHandler{targetHandler: targetHandler}
 }
 
-// To register handler on httprouter
+// ServeXHTTP To register handler on httprouter
 func (h *XHTTPHandler) ServeXHTTP(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	stop := false
 	for _, handler := range h.reqHandlers {

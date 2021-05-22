@@ -9,7 +9,7 @@ import (
 	"github.com/torchcc/crank4go-core/util"
 )
 
-// 1. applied on crankerRouter's websocketServer's http request, not websocket request.
+// PreLoggingFilter 1. applied on crankerRouter's websocketServer's http request, not websocket request.
 // 2. applied on crankerRouter's httpServer
 // log before the request is handled by target handler
 func PreLoggingFilter(_ http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
@@ -17,14 +17,14 @@ func PreLoggingFilter(_ http.ResponseWriter, r *http.Request, _ httprouter.Param
 	return false
 }
 
-// a log filter apply on crankerRouter's registerHandler's http request, not websocket request
+// PostLoggingFilter a log filter apply on crankerRouter's registerHandler's http request, not websocket request
 // log after the request is handled by target handler
 func PostLoggingFilter(_ http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
 	util.LOG.Infof("finished - API {%s} being called by client {%s} through {%s}", r.URL.String(), r.RemoteAddr, r.Method)
 	return false
 }
 
-// applied on router's httpServer, it aborts requests with invalid HTTPMethod
+// ReqValidatorFilter applied on router's httpServer, it aborts requests with invalid HTTPMethod
 func ReqValidatorFilter(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
 	var (
 		contentLen int

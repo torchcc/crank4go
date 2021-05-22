@@ -74,7 +74,7 @@ func (s *ConnectorSocket) RegisterURI() *url.URL {
 	return s.registerURI
 }
 
-// A Websocket Session has connected successfully and is ready to be used.
+// OnWebsocketConnect A Websocket Session has connected successfully and is ready to be used.
 func (s *ConnectorSocket) OnWebsocketConnect(conn *ws.Conn) {
 	s.session = conn
 	LOG.Debugf("connected to %s, sockId= %s", conn.RemoteAddr().String(), s.SockId.String())
