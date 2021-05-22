@@ -69,7 +69,7 @@ import (
     "fmt"
     "net/http"
     "net/url"
-    "github.com/torchcc/crank4go-core/crank4go-connector-embedded"
+    "github.com/torchcc/crank4go"
 )
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
    fmt.Fprintf(w, "Hello World")

@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/torchcc/crank4go-core/crank4go-connector-embedded"
-	. "github.com/torchcc/crank4go-core/test/scaffolding"
+	. "github.com/torchcc/crank4go/connector"
+	. "github.com/torchcc/crank4go/test/scaffolding"
 )
 
 // upload img done, get done, post done , all method done, connector is ok.

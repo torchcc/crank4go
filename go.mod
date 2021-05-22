@@ -1,4 +1,4 @@
-module github.com/torchcc/crank4go-core
+module github.com/torchcc/crank4go
 
 go 1.16
 

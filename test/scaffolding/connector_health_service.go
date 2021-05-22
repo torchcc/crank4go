@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/torchcc/crank4go-core/crank4go-router-embedded/api"
-	"github.com/torchcc/crank4go-core/crank4go-router-embedded/handler"
-	ptc "github.com/torchcc/crank4go-core/cranker-protocol"
-	"github.com/torchcc/crank4go-core/util"
+	ptc "github.com/torchcc/crank4go/protocol"
+	"github.com/torchcc/crank4go/router/api"
+	"github.com/torchcc/crank4go/router/handler"
+	"github.com/torchcc/crank4go/util"
 )
 
 type HealthService interface {

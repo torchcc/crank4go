@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	router "github.com/torchcc/crank4go-core/crank4go-router-embedded"
-	"github.com/torchcc/crank4go-core/util"
+	router "github.com/torchcc/crank4go/router"
+	"github.com/torchcc/crank4go/util"
 )
 
 type RouterHealthService struct {
@@ -26,7 +26,7 @@ func NewRouterHealthService(routerAvailability *router.RouterAvailability) *Rout
 
 func (r *RouterHealthService) CreateHealthReport() map[string]interface{} {
 	embeddedRouterStatus := make(map[string]interface{})
-	embeddedRouterStatus["crank4go-router-embedded"] = r.routerAvailability.Status()
+	embeddedRouterStatus["router"] = r.routerAvailability.Status()
 	dependencies := make([]interface{}, 0, 8)
 	dependencies = append(dependencies, embeddedRouterStatus)
 

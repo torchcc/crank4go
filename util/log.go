@@ -6,7 +6,7 @@ import (
 	"github.com/op/go-logging"
 )
 
-var LOG = logging.MustGetLogger("crank4go-core")
+var LOG = logging.MustGetLogger("crank4go")
 
 // Example format string. Everything except the message has a custom color
 // which is dependent on the log level. Many fields have a custom output

@@ -5,9 +5,9 @@ import (
 	"net/url"
 	"time"
 
-	ct "github.com/torchcc/crank4go-core/crank4go-connector-embedded"
-	"github.com/torchcc/crank4go-core/crank4go-connector-embedded/plugin"
-	"github.com/torchcc/crank4go-core/util"
+	ct "github.com/torchcc/crank4go/connector"
+	"github.com/torchcc/crank4go/connector/plugin"
+	"github.com/torchcc/crank4go/util"
 )
 
 type ConnectorApp struct {

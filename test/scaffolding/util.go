@@ -7,8 +7,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/torchcc/crank4go-core/test"
-	"github.com/torchcc/crank4go-core/util"
+	"github.com/torchcc/crank4go/test"
+	"github.com/torchcc/crank4go/util"
 )
 
 func GetTestTLSConfig() *tls.Config {

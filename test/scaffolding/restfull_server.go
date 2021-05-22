@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/torchcc/crank4go-core/crank4go-router-embedded/api"
-	"github.com/torchcc/crank4go-core/util"
+	"github.com/torchcc/crank4go/router/api"
+	"github.com/torchcc/crank4go/util"
 )
 
 type RestfulServer struct {

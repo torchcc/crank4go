@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net/url"
 
-	router "github.com/torchcc/crank4go-core/crank4go-router-embedded"
-	"github.com/torchcc/crank4go-core/crank4go-router-embedded/api"
-	"github.com/torchcc/crank4go-core/crank4go-router-embedded/darklaunch_manager"
-	"github.com/torchcc/crank4go-core/crank4go-router-embedded/router_socket"
-	"github.com/torchcc/crank4go-core/util"
+	router "github.com/torchcc/crank4go/router"
+	"github.com/torchcc/crank4go/router/api"
+	"github.com/torchcc/crank4go/router/darklaunch_manager"
+	"github.com/torchcc/crank4go/router/router_socket"
+	"github.com/torchcc/crank4go/util"
 )
 
 type RouterApp struct {

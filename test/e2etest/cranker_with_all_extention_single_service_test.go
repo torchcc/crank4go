@@ -7,12 +7,12 @@ import (
 	"net/url"
 	"testing"
 
-	connector "github.com/torchcc/crank4go-core/crank4go-connector-embedded"
-	"github.com/torchcc/crank4go-core/crank4go-connector-embedded/plugin"
-	router "github.com/torchcc/crank4go-core/crank4go-router-embedded"
-	protocol "github.com/torchcc/crank4go-core/cranker-protocol"
-	. "github.com/torchcc/crank4go-core/test/scaffolding"
-	"github.com/torchcc/crank4go-core/util"
+	connector "github.com/torchcc/crank4go/connector"
+	"github.com/torchcc/crank4go/connector/plugin"
+	protocol "github.com/torchcc/crank4go/protocol"
+	router "github.com/torchcc/crank4go/router"
+	. "github.com/torchcc/crank4go/test/scaffolding"
+	"github.com/torchcc/crank4go/util"
 )
 
 func TestCrankerWithAllExtensionSingleService(t *testing.T) {
