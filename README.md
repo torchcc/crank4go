@@ -1,5 +1,5 @@
 
-Crank4go
+Crank4go API Gateway
 =======
 
 Brief Introduction 
@@ -69,7 +69,7 @@ import (
     "fmt"
     "net/http"
     "net/url"
-    "crank4go/crank4go-connector-embedded"
+    "github.com/torchcc/crank4go-core/crank4go-connector-embedded"
 )
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
    fmt.Fprintf(w, "Hello World")
@@ -103,9 +103,12 @@ Advantages
     we can deploy multiple Router instance on the loadBalancer side. 
     Each web-service can be registered to multiple router
 
-3. Multi-language supported:  communication between router and connector is over websocket, so apart from crank4go-connector,
-other connectors written by other language, such as java, python(making it convenient to play micro-service with python)
- etc can also be registered to Go-router. 
+3. Multi-language supported:  communication between router and connector is through websocket, so apart from crank4go-connector,
+other connectors written by other language can also be registered to Go-router. such as
+   1. [java](https://github.com/danielflower/crank4j/tree/master/crank4j-connector)
+   2. [python](https://github.com/torchcc/crank4py-connector) (making it convenient to play micro-service with python)
+   3. [java script](https://github.com/danielflower/npm-cranker-connector) 
+ 
  
 4. Hooks supported: hooks are preset in the form of plugin and interceptor to monitor the connection activity of router and connector.
 
