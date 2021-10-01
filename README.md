@@ -116,6 +116,12 @@ other connectors written by other language can also be registered to Go-router. 
  
 4. Hooks supported: hooks are preset in the form of plugin and interceptor to monitor the connection activity of router and connector.
 
+Performance
+---
+As the picture shows, under the same testing condition on my local Macbook Pro 2018, 
+the left side is crank4go router's performance, the right side is crank4j router's, the former is much better than the latter.
+
+![performance_test](performance_test.png)
 
 ### TODO 
 1. add request rate control plugin. 
