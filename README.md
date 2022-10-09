@@ -4,10 +4,9 @@ Crank4go API Gateway
 
 Brief Introduction 
 -----
-It is a Golang implementation of [Crank4j](https://github.com/danielflower/crank4j), which derived from [Cranker](https://github.com/nicferrier/cranker).
- the follow introduction is quoted from the origin project:
+It is a Golang implementation of [Crank4j](https://github.com/danielflower/crank4j) which is derived from [Cranker](https://github.com/nicferrier/cranker). The following introduction is quoted from the origin project:
 
-It consists of 2 executables that together act as a reverse proxy. What it
+It consists of two executables that together act as a reverse proxy. What it
 allows is for cases where there is a firewall between your inside network and
 a [DMZ zone](https://en.wikipedia.org/wiki/DMZ_(computing)).
 
@@ -35,7 +34,7 @@ like a normal reverse proxy.
 Dive deeper 
 ---
 
-this 2 picture are quoted from [Cranker](https://github.com/nicferrier/cranker)
+These two pictures are quoted from [Cranker](https://github.com/nicferrier/cranker)
 
 HTTP requests with cranker:
 ![cranker for http](cranker-http-request.png)
@@ -95,8 +94,8 @@ func main() {
 
 #### router usage
 
-1. here is example of deploying the [API Gateway crank4go router](https://github.com/torchcc/crank4go-router) 
-2. if you want more functionalities, you might want to refer to `crank4go/test/e2etest/cranker_with_all_extention_single_service_test.go`
+1. Here is an example of deploying the [API Gateway crank4go router](https://github.com/torchcc/crank4go-router) 
+2. If you want more functionalities, you might want to refer to `crank4go/test/e2etest/cranker_with_all_extention_single_service_test.go`
 
 
 Advantages
@@ -124,4 +123,4 @@ the left side is crank4go router's performance, the right side is crank4j router
 ![performance_test](performance_test.png)
 
 ### TODO 
-1. add request rate control plugin. 
+1. Add request rate control plugin. 
